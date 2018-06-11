@@ -1,10 +1,16 @@
 {
   "name": "movie-list",
-  "version": "0.0.1",
-  "description": "Your own movie library",
-  "main": "dist/movie-list.min.js",
-  "repository": "https://github.com/ecrofeg/movie-list.git",
-  "author": "ecrofeg <ecrofeg1@gmail.com>",
-  "license": "MIT",
-  "private": false
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
