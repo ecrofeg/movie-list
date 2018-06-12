@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchField from './SearchField';
+import Movies from './Movies';
 
 class App extends Component {
 	render() {
@@ -10,6 +11,8 @@ class App extends Component {
 				<div className="app-search">
 					<SearchField/>
 				</div>
+
+				<Movies/>
 			</div>
 		);
 	}

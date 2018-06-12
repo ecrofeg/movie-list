@@ -68,4 +68,34 @@ $searchFieldWidth: 400px;
 			}
 		}
 	}
+
+	&-movies {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 50px 0 30px 0;
+
+		&-card {
+			&.ui.card {
+				margin: 0 15px 0 0;
+				width: 168.5px;
+			}
+
+			&__title {
+				font-size: 1em !important;
+			}
+
+			&__bottom {
+				display: flex;
+
+				&_liked {
+					color: #4caf50 !important;
+				}
+
+				&_disliked {
+					color: #f44336 !important;
+					align-items: center;
+				}
+			}
+		}
+	}
 }
