@@ -1,0 +1,63 @@
+$searchFieldWidth: 400px;
+
+.app {
+	width: 1200px;
+	padding-top: 20px;
+	margin: 0 auto;
+
+	&-title {
+		text-align: center;
+	}
+
+	&-search {
+		margin-top: 30px;
+		text-align: center;
+
+		&-field {
+			display: inline-block;
+			width: $searchFieldWidth;
+
+			.input {
+				width: 100%;
+			}
+
+			.results {
+				width: $searchFieldWidth !important;
+
+				.result {
+					padding: 10px !important;
+				}
+			}
+		}
+
+		&-results {
+			&-item {
+				display: flex;
+				align-items: center;
+
+				&__poster {
+					img {
+						max-width: 40px;
+						max-height: 60px;
+					}
+				}
+
+				&__info {
+					padding-left: 10px;
+					text-align: left;
+					align-self: flex-start;
+
+					&-title {
+						white-space: nowrap;
+					}
+
+					&-stars {
+						&__name {
+							white-space: nowrap;
+						}
+					}
+				}
+			}
+		}
+	}
+}
