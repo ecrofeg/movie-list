@@ -8,7 +8,7 @@ class App extends Component {
 				<h1 className="app-title">My Movie List</h1>
 
 				<div className="app-search">
-					<SearchField className="app-search-field"/>
+					<SearchField/>
 				</div>
 			</div>
 		);

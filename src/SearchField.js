@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Search } from 'semantic-ui-react';
+import { addMovie } from './store/collections/actions';
 
 const source = [
 	{
@@ -35,14 +37,17 @@ const source = [
 	}
 ];
 
-export default class SearchExampleStandard extends Component {
+class SearchExampleStandard extends Component {
 	componentWillMount() {
 		this.resetComponent();
 	}
 
 	resetComponent = () => this.setState({ isLoading: false, results: [], value: '' });
 
-	handleResultSelect = (e, { result }) => this.setState({ value: result.title });
+	handleResultSelect = (e, { result }) => {
+		this.setState({ value: '' });
+		this.props.addMovie(result);
+	};
 
 	handleSearchChange = (e, { value }) => {
 		this.setState({ isLoading: true, value });
@@ -92,6 +97,7 @@ export default class SearchExampleStandard extends Component {
 
 		return (
 			<Search
+				className="app-search-field"
 				loading={isLoading}
 				onResultSelect={this.handleResultSelect}
 				onSearchChange={_.debounce(this.handleSearchChange, 300, { leading: true })}
@@ -99,8 +105,9 @@ export default class SearchExampleStandard extends Component {
 				results={results}
 				value={value}
 				resultRenderer={this.renderResult}
-				{...this.props}
 			/>
 		)
 	}
 }
+
+export default connect(null, { addMovie })(SearchExampleStandard);

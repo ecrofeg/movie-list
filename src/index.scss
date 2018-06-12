@@ -36,6 +36,8 @@ $searchFieldWidth: 400px;
 				align-items: center;
 
 				&__poster {
+					display: flex;
+
 					img {
 						max-width: 40px;
 						max-height: 60px;
@@ -45,13 +47,19 @@ $searchFieldWidth: 400px;
 				&__info {
 					padding-left: 10px;
 					text-align: left;
-					align-self: flex-start;
+
+					align-self: stretch;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
 
 					&-title {
 						white-space: nowrap;
 					}
 
 					&-stars {
+						color: rgba(0, 0, 0, 0.54);
+
 						&__name {
 							white-space: nowrap;
 						}
