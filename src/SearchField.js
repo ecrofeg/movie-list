@@ -111,7 +111,7 @@ class SearchExampleStandard extends Component {
 				results={results}
 				value={value}
 				spellcheck={false}
-				placeholder="Enter movie name"
+				placeholder="Enter movie name..."
 				resultRenderer={this.renderResult}
 			/>
 		)
