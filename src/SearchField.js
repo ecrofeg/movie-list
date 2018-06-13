@@ -110,6 +110,7 @@ class SearchExampleStandard extends Component {
 				onFocus={this.handleFocus}
 				results={results}
 				value={value}
+				spellcheck={false}
 				placeholder="Enter movie name"
 				resultRenderer={this.renderResult}
 			/>
