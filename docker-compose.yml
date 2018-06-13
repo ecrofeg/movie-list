@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  nginx:
+    container_name: movie-list-nginx-container
+    image: movie-list-nginx-image
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+#    volumes:
+#      - ./build:/usr/share/nginx/html
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
