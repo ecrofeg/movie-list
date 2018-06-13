@@ -6,7 +6,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="app">
-				<h1 className="app-title">My Movie List</h1>
+				<h1 className="app-title">My Movies List</h1>
 
 				<div className="app-search">
 					<SearchField/>
