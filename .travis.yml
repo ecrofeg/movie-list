@@ -6,7 +6,7 @@ node_js:
   - "10"
 
 script:
-  - npm run build
+  - PUBLIC_URL=https://ecrofeg.github.io/movie-list npm run build
 
 deploy:
   provider: pages
