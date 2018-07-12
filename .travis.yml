@@ -1,10 +1,15 @@
+sudo: false
+
 language: node_js
+
 node_js:
-	- stable
+  - "10"
+
 script:
-	- npm run build
+  - npm run build
+
 deploy:
-	provide: pages
-	skip_cleanup: true
-	github_token: $GITHUB_TOKEN
-	local_dir: build
+  provide: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: build
