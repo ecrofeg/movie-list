@@ -1,54 +1,19 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Search } from 'semantic-ui-react';
 import { addMovie } from './store/collections/actions';
-
-const source = [
-	{
-		title: 'Solo: A Star Wars Story',
-		year: '2018',
-		isLiked: true,
-		poster: 'https://m.media-amazon.com/images/M/MV5BOTM2NTI3NTc3Nl5BMl5BanBnXkFtZTgwNzM1OTQyNTM@._V1_SY1000_CR0,0,674,1000_AL_.jpg',
-		shortDescription: 'Through a series of daring escapades deep within a dark and dangerous criminal underworld, Han Solo meets his mighty future copilot Chewbacca and encounters the notorious gambler Lando Calrissian.',
-		stars: [
-			'Alden Ehrenreich',
-			'Woody Harrelson',
-			'Emilia Clarke'
-		]
-	},
-	{
-		title: 'It',
-		year: '2017',
-		isLiked: false,
-		poster: 'https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzODM3Mzg@._V1_SY1000_CR0,0,666,1000_AL_.jpg',
-		shortDescription: 'In a small town in Maine, seven children known as The Losers Club come face to face with life problems, bullies and a monster that takes the shape of a clown called Pennywise.',
-		stars: [
-			'Bill Skarsgård',
-			'Jaeden Lieberher',
-			'Finn Wolfhard'
-		]
-	},
-	{
-		title: 'Thor: Ragnarok',
-		year: '2017',
-		isLiked: true,
-		poster: 'https://m.media-amazon.com/images/M/MV5BMjMyNDkzMzI1OF5BMl5BanBnXkFtZTgwODcxODg5MjI@._V1_SY1000_CR0,0,674,1000_AL_.jpg',
-		shortDescription: 'Thor is on the other side of the universe and finds himself in a race against time to get back to Asgard to stop Ragnarok, the prophecy of destruction to his homeworld and the end of Asgardian civilization, at the…',
-		stars: [
-			'Chris Hemsworth',
-			'Tom Hiddleston',
-			'Cate Blanchett'
-		]
-	}
-];
+import { searchMovies } from './store/results/actions';
 
 class SearchExampleStandard extends Component {
-	componentWillMount() {
-		this.resetComponent();
-	}
+	timeout = null;
 
-	resetComponent = () => this.setState({ isLoading: false, results: [], value: '' });
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			value: ''
+		};
+	}
 
 	handleResultSelect = (e, { result }) => {
 		this.setState({ value: '' });
@@ -56,21 +21,15 @@ class SearchExampleStandard extends Component {
 	};
 
 	handleSearchChange = (e, { value }) => {
-		this.setState({ isLoading: true, value });
+		this.setState({ value });
 
-		setTimeout(() => {
-			if (this.state.value.length < 1) {
-				return this.resetComponent();
-			}
+		if (value && value.length > 2) {
+			clearTimeout(this.timeout);
 
-			const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-			const isMatch = result => re.test(result.title);
-
-			this.setState({
-				isLoading: false,
-				results: _.filter(source, isMatch)
-			});
-		}, 300);
+			this.timeout = setTimeout(() => {
+				this.props.searchMovies(value);
+			}, 200);
+		}
 	};
 
 	handleFocus = e => {
@@ -81,6 +40,7 @@ class SearchExampleStandard extends Component {
 		return <div className="app-search-results-item">
 			<div className="app-search-results-item__poster">
 				<img src={props.poster} alt={props.title}/>
+				<div className="app-search-results-item__poster-placeholder"/>
 			</div>
 
 			<div className="app-search-results-item__info">
@@ -99,18 +59,18 @@ class SearchExampleStandard extends Component {
 	}
 
 	render() {
-		const { isLoading, value, results } = this.state;
+		const { value } = this.state;
 
 		return (
 			<Search
 				className="app-search-field"
-				loading={isLoading}
+				loading={this.props.isLoading}
 				onResultSelect={this.handleResultSelect}
-				onSearchChange={_.debounce(this.handleSearchChange, 300, { leading: true })}
+				onSearchChange={this.handleSearchChange}
 				onFocus={this.handleFocus}
-				results={results}
+				results={this.props.results}
 				value={value}
-				spellcheck={false}
+				spellCheck={false}
 				placeholder="Enter movie name..."
 				resultRenderer={this.renderResult}
 			/>
@@ -118,4 +78,7 @@ class SearchExampleStandard extends Component {
 	}
 }
 
-export default connect(null, { addMovie })(SearchExampleStandard);
+export default connect(state => ({
+	isLoading: state.isLoading,
+	results: state.results
+}), { addMovie, searchMovies })(SearchExampleStandard);

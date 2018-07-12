@@ -37,6 +37,8 @@ $searchFieldWidth: 400px;
 
 				&__poster {
 					display: flex;
+					width: 40px;
+					height: 60px;
 
 					img {
 						max-width: 40px;
@@ -47,6 +49,7 @@ $searchFieldWidth: 400px;
 				&__info {
 					padding-left: 10px;
 					text-align: left;
+					overflow: hidden;
 
 					align-self: stretch;
 					display: flex;
@@ -59,6 +62,9 @@ $searchFieldWidth: 400px;
 
 					&-stars {
 						color: rgba(0, 0, 0, 0.54);
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
 
 						&__name {
 							white-space: nowrap;
