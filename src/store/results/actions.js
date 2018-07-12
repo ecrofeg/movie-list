@@ -13,7 +13,7 @@ export const searchMovies = searchText => {
 	return async dispatch => {
 		dispatch(startLoading());
 
-		const apiURL = `${process.env.REACT_APP_API_URL}/api/v1/autocomplete/${encodeURIComponent(searchText)}`;
+		const apiURL = `http://46.101.84.32:8080/api/v1/autocomplete/${encodeURIComponent(searchText)}`;
 
 		const response = await fetch(apiURL);
 		const results = await response.json();
